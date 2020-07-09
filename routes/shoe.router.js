@@ -38,6 +38,11 @@ router.get('/', function(req, res) {
         });
 }); // END GET ROUTE
 
+// PUT ROUTE
+router.put('/:id', (req, res) => {
+    console.log(`in PUT route`);
+});
+
 // DELETE ROUTE
 router.delete('/:id', (req, res) => {
     console.log(`In DELETE route`);

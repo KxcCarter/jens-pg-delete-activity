@@ -7,6 +7,10 @@ function handleReady() {
     // DELETE button event listener
     $('#jsShoeDisplay').on('click', '.js-item-ctrl', handleDeleteItem);
 
+    // PUT / edit butten event listener
+    $('#jsShoeDisplay').on('click', '.js-item-edit', handleEditItem);
+    // $('#jsShoeDisplay').on('click', '.js-btn-confirm-edit', putEdit);
+
     // Get data
     getShoes();
 }
@@ -65,9 +69,10 @@ function appendShoeTable(shoes) {
         let tableRow = $(`
     <tr>
       <td>${shoe.name}</td>
-      <td>${shoe.cost}</td>
+      <td>$${shoe.cost} <span class="js-item-edit btn btn-sm btn-outline-warning" >edit</span></td>
+
       <td>${shoe.size}</td>
-      <td class="js-item-ctrl">X</td>
+      <td class="js-item-ctrl btn btn-sm btn-outline-danger">X</td>
     </tr>
     `);
         // attach data to row, need for delete
@@ -100,3 +105,23 @@ function deleteItem(shoeID) {
             console.log('There was an error!', err);
         });
 }
+
+function handleEditItem() {
+    const shoeID = $(this).parent().parent().data('id');
+    const $item = $(this).parent();
+    $item.html(`
+    <input class="js-new-price" placeholder="Input new price" type="number">
+    <span class="btn js-btn-confirm-edit">✅</span>
+
+    `);
+}
+
+// function putEdit(shoeID) {
+//     // make stuff work
+
+//     $.ajax({
+//         type: 'PUT',
+//         url: `/shoes/${shoeID}`,
+//         data:
+//     })
+// }
