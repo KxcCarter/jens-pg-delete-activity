@@ -91,7 +91,7 @@ function deleteItem(shoeID) {
 
     $.ajax({
             type: 'DELETE',
-            url: `/${shoeID}`,
+            url: `/shoes/${shoeID}`,
         })
         .then((response) => {
             getShoes();
