@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const pool = require('../modules/pool.js');
+const pool = require('../modules/pool');
 
 // Express removed the '/shoes' when we do a app.use
 router.post('/', function(req, res) {
