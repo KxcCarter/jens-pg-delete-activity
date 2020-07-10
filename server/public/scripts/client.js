@@ -1,3 +1,5 @@
+const { response } = require('express');
+
 $(document).ready(handleReady);
 
 function handleReady() {
@@ -116,12 +118,19 @@ function handleEditItem() {
     `);
 }
 
-// function putEdit(shoeID) {
-//     // make stuff work
-
-//     $.ajax({
-//         type: 'PUT',
-//         url: `/shoes/${shoeID}`,
-//         data:
-//     })
-// }
+function putEdit(shoeID, newPrice) {
+    $.ajax({
+            type: 'PUT',
+            url: `/shoes/${shoeID}`,
+            data: { newPrice },
+        })
+        .then((response) => {
+            console.log(response);
+            getShoes();
+        })
+        .catch((err) => {
+            console.log(
+                `There was a terrrible, horrible, no good, very bad mistake! ${err}`
+            );
+        });
+}

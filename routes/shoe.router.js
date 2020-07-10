@@ -41,6 +41,15 @@ router.get('/', function(req, res) {
 // PUT ROUTE
 router.put('/:id', (req, res) => {
     console.log(`in PUT route`);
+    const query = `UPDATE "shoes" SET "cost" = $1 WHERE "id" = $2`;
+    pool
+        .query(query, [req.body.newPrice, req.params.id])
+        .then((dbRes) => {
+            res.sendStatus(201);
+        })
+        .catch((err) => {
+            console.log(err);
+        });
 });
 
 // DELETE ROUTE
