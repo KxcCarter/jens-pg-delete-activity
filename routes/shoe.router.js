@@ -25,7 +25,7 @@ router.post('/', function(req, res) {
 router.get('/', function(req, res) {
     console.log('In GET route');
     // The query we want to run
-    const query = 'SELECT * FROM "shoes";';
+    const query = 'SELECT * FROM "shoes" ORDER BY "size" ASC;';
     pool
         .query(query)
         .then((results) => {

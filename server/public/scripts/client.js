@@ -1,5 +1,3 @@
-const { response } = require('express');
-
 $(document).ready(handleReady);
 
 function handleReady() {
@@ -66,7 +64,6 @@ function appendShoeTable(shoes) {
     $('#jsShoeDisplay').empty();
 
     for (let shoe of shoes) {
-        console.log(shoe);
         //make a row with info
         let tableRow = $(`
     <tr>
@@ -109,12 +106,29 @@ function deleteItem(shoeID) {
 }
 
 function handleEditItem() {
-    const shoeID = $(this).parent().parent().data('id');
-    const $item = $(this).parent();
-    $item.html(`
-    <input class="js-new-price" placeholder="Input new price" type="number">
-    <span class="btn js-btn-confirm-edit">✅</span>
+    // targets jQuery element
+    const $update = $(this).parent().children('.js-new-price');
 
+    // if this is the first time button has been clicked, no data has been input into value
+    // and therefore $update.length === 0, so this block is skipped.
+    if ($update.length > 0) {
+        // collects and stores data from the <tr> and the user input
+        const shoeID = $(this).parent().parent().parent().data('id');
+        const newPrice = $('.js-new-price').val();
+
+        // calls the putEdit function passing in the above data.
+        putEdit(shoeID, newPrice);
+        return;
+    }
+
+    // replaces all data in this <td> with the following html - includes a clickable span
+    // with the same js class as the 'edit' button which was used to call this function.
+    // Also creates an input field where the user can change price.
+    $(this).parent().html(`
+    <div class="js-update-div">
+    <input class="js-new-price" placeholder="Input new price" type="number">
+    <span class="btn js-item-edit">✅</span>
+    </div>
     `);
 }
 
